@@ -9,35 +9,29 @@ function App() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  useEffect(()=>{
     handleGetData();
-  }, [page]);
-
-  const handleGetData = async () => {
-    setLoading(true);
-    try {
-      const data = await getGames(page);
-      if (!data.error) {
-        setGames(prevGames => [...prevGames, ...data.items]);
-        setTotalPages(data.totalPages);
-      }
-    } catch (error) {
-      console.error('Error fetching games:', error);
-    } finally {
+  },[page]);
+  const handleGetData = async()=>{
+    const data = await getGames(page);
+    console.log("data",data);
+    if(!data.error) {
+      setGames(data.results);
+      setTotalPages(data.count);
       setLoading(false);
     }
-  };
-
+  }
+  let html  = <ShowGames games={games} onClick={() => setPage(page => page + 1)}/>
+  if(games.length == 0){
+    html = <p className="text-alert">Cargando...</p>
+  }
   return (
     <div>
-      <h1>Juegos</h1>
-      {loading ? (
-        <p className="text-alert">Cargando...</p>
-      ) : (
-        <ShowGames games={games} onClick={() => setPage(prevPage => prevPage + 1)} />
-      )}
+      <h1>Eventos</h1>
+      {html}
+      
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,7 +1,7 @@
 import { API_KEY } from './key';
 
 const fetchData = async (route, method, inputData = null) => {
-    let url = new URL(route);
+    const url = new URL(route);
     url.searchParams.append('key', API_KEY); // Añadir la API key a la URL
 
     const fetchOptions = {
