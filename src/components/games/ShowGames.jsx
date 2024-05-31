@@ -1,16 +1,19 @@
-// src/ShowGames.jsx
 import React, { useState, useEffect } from 'react';
 import { getGames } from '../../utils/fetch';
+import SaveGamesButton from '../favorites/Fav';
+import GameModal from '../modal/Modal';
+import './ShowGames.css';  // Importa el archivo CSS
 
 function ShowGames() {
   const [games, setGames] = useState([]);
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
+  const [selectedGame, setSelectedGame] = useState(null);
+  const [savedGames, setSavedGames] = useState(JSON.parse(localStorage.getItem('savedGames')) || []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const data = await getGames(page, query);
+        const data = await getGames();
         setGames(data.results);
       } catch (error) {
         console.error('Error fetching games:', error);
@@ -18,44 +21,58 @@ function ShowGames() {
     };
 
     fetchGames();
-  }, [page, query]);
+  }, []);
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value);
-    setPage(1); // Reset page to 1 when search query changes
+  const handleGameClick = (game) => {
+    setSelectedGame(game);
+    setIsModalOpen(true);
   };
 
-  const handleNextPage = () => {
-    setPage(prevPage => prevPage + 1);
+  const handleSaveGame = (game) => {
+    const isSaved = savedGames.some(savedGame => savedGame.id === game.id);
+    let updatedGames;
+    if (isSaved) {
+      updatedGames = savedGames.filter(savedGame => savedGame.id !== game.id);
+    } else {
+      updatedGames = [...savedGames, game];
+    }
+    setSavedGames(updatedGames);
+    localStorage.setItem('savedGames', JSON.stringify(updatedGames));
   };
 
-  const handlePrevPage = () => {
-    setPage(prevPage => Math.max(prevPage - 1, 1));
+  const isGameSaved = (game) => {
+    return savedGames.some(savedGame => savedGame.id === game.id);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedGame(null);
   };
 
   return (
-    <div>
-      <h1>RAWG Games</h1>
-      <input
-        type="text"
-        value={query}
-        onChange={handleSearch}
-        placeholder="Search for games"
-      />
-      <div>
+    <div className="container">
+      <h1>Pixel Games</h1>
+      <div className="games-grid">
         {games.map((game) => (
-          <div key={game.id}>
+          <div key={game.id} className="game-card">
+            <img className="game-img" src={game.background_image} alt={game.name} onClick={() => handleGameClick(game)} />
             <h2>{game.name}</h2>
-            <img src={game.background_image} alt={game.name} style={{ width: '200px' }} />
             <p>Released: {game.released}</p>
             <p>Rating: {game.rating}</p>
+            <SaveGamesButton 
+              selectedGame={game} 
+              isSaved={isGameSaved(game)} 
+              handleSaveGame={handleSaveGame} 
+            />
           </div>
         ))}
       </div>
-      <div>
-        <button onClick={handlePrevPage} disabled={page === 1}>Previous</button>
-        <button onClick={handleNextPage}>Next</button>
-      </div>
+      {isModalOpen && (
+        <GameModal 
+          game={selectedGame} 
+          onClose={handleCloseModal} 
+        />
+      )}
     </div>
   );
 }

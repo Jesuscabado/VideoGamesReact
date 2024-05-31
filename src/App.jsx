@@ -9,29 +9,36 @@ function App() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
+  useEffect(() => {
     handleGetData();
-  },[page]);
-  const handleGetData = async()=>{
+  }, [page]);
+
+  const handleGetData = async () => {
+    setLoading(true); // Iniciar carga
     const data = await getGames(page);
-    console.log("data",data);
-    if(!data.error) {
-      setGames(data.results);
-      setTotalPages(data.count);
-      setLoading(false);
+    console.log("data", data);
+    if (!data.error) {
+      setTimeout(() => {
+        setGames(data.results);
+        setTotalPages(data.count);
+        setLoading(false); // Finalizar carga después de 2 segundos
+      }, 2000);
     }
-  }
-  let html  = <ShowGames games={games} onClick={() => setPage(page => page + 1)}/>
-  if(games.length == 0){
-    html = <p className="text-alert">Cargando...</p>
-  }
+  };
+
   return (
     <div>
       <h1>Eventos</h1>
-      {html}
-      
+      {loading ? (
+        <div className="loading-container">
+          <p className="text-alert">Cargando...</p>
+          <img src="https://i.pinimg.com/originals/a6/af/d6/a6afd66d0c0f9ff3f7f4e78ea62f9bdb.gif" alt="Loading" />
+        </div>
+      ) : (
+        <ShowGames games={games} onClick={() => setPage(page => page + 1)} />
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
