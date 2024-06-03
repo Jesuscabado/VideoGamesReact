@@ -35,3 +35,8 @@
 .custom-cursor {
   cursor: url('./icons/FinalCursor.png'), auto;
 }
+
+body {
+  background-color: rgb(0, 0, 0);
+  background-image:('') ;
+}

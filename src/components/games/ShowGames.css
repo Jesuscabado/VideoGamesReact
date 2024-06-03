@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "finalf.ttf";
+    src: url(/src/assets/fonts/finalf.ttf);
+}
+
 .container {
     padding: 20px;
     max-width: 1200px;
@@ -6,10 +11,18 @@
   
 h1 {
     text-align: center;
+    font-family: "finalf.ttf";
     font-size: 2.5em;
     margin-bottom: 20px;
-    font: optional;
-    font-family: "SuperNintendo.ttf";
+    color: #ffff;
+    text-shadow: 2px 2px #212421, 1px 1px #212021;
+}
+
+.pixel {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-family: "finalf.ttf";
     color: #ffff;
     text-shadow: 2px 2px #212421, 1px 1px #212021;
 }
