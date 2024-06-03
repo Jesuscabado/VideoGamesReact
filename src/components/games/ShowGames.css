@@ -8,6 +8,10 @@ h1 {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 20px;
+    font: optional;
+    font-family: "SuperNintendo.ttf";
+    color: #ffff;
+    text-shadow: 2px 2px #212421, 1px 1px #212021;
 }
   
 .games-grid {
@@ -130,3 +134,9 @@ button:hover {
     font-size: 24px;
     cursor: pointer;
 }
+
+.custom-cursor {
+    cursor: url('/icons/FinalCursor.png'), auto;
+  }
+
+  

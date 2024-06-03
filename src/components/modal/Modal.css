@@ -17,6 +17,7 @@
 }
 
 .modal-content {
+  background-color: #04009d;
   background: #04009d;
   background: -moz-linear-gradient(top, #04009d 0%, #06004d 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #04009d), color-stop(100%, #06004d));
@@ -38,7 +39,7 @@
   color: #eff1ff;
   text-shadow: 2px 2px #212421,
                1px 1px #212021;
-  font-family: "SuperNintendo.ttf", Verdana, sans-serif;
+  font-family: "SuperNintendo.ttf";
   font-size: 20px;
   font-weight: normal;
 

@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getGames } from './utils/fetch';
 import ShowGames from './components/games/ShowGames';
+import Navbar from './components/navBar/NavBar';
+import SavedGamesList from './components/savedGames/SavedGames'; // Importa el componente SavedGamesList
 import './App.css';
 
 function App() {
   const [games, setGames] = useState([]);
+  const [savedGames, setSavedGames] = useState(JSON.parse(localStorage.getItem('savedGames')) || []);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -27,16 +31,22 @@ function App() {
   };
 
   return (
-    <div>
-      {loading ? (
-        <div className="loading-container">
-          <p className="text-alert">Cargando...</p>
-          <img src="https://i.pinimg.com/originals/a6/af/d6/a6afd66d0c0f9ff3f7f4e78ea62f9bdb.gif" alt="Loading" />
-        </div>
-      ) : (
-        <ShowGames games={games} onClick={() => setPage(page => page + 1)} />
-      )}
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        {loading ? (
+          <div className="loading-container">
+            <p className="text-alert">Cargando...</p>
+            <img src="https://64.media.tumblr.com/e694cc11937e723db7f29cb0fba7364d/tumblr_p845bbxi591w1nb8jo9_r2_640.gif" alt="Loading" />
+          </div>
+        ) : (
+          <Routes>
+            <Route path="/show-games" element={<ShowGames games={games} onClick={() => setPage(page => page + 1)} />} />
+            <Route path="/saved-games" element={<SavedGamesList savedGames={savedGames} />} /> {/* Añade la ruta para el componente SavedGamesList */}
+          </Routes>
+        )}
+      </div>
+    </Router>
   );
 }
 
