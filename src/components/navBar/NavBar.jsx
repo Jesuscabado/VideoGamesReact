@@ -12,15 +12,24 @@ function Navbar() {
         <li className="navbar-item">
           <Link to="/saved-games">Favorites</Link>
         </li>
-        <li className="navbar-item">
-          <Link to="/register">Register</Link>
+        <li className='navbar-item'>
+          <Link to="/all-amiibos">Amiibos</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/login">Login</Link>
+          {localStorage.getItem('token') ? (
+            <button
+              onClick={() => {
+                localStorage.removeItem('token');
+                window.location.reload();
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
         </li>
-        <li className="navbar-item">
-          <Link to="/logout">Logout</Link>
-        </li>
+        
       </ul>
     </nav>
   );

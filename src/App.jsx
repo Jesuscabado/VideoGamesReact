@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { getGames } from './utils/fetch';
-import ShowGames from './components/games/ShowGames';
+import { getGames } from './utils/fetchGames';
+import ShowGames from './components/games/allGames/ShowGames';
 import Navbar from './components/navBar/NavBar';
-import SavedGamesList from './components/savedGames/SavedGames'; // Importa el componente SavedGamesList
+import SavedGamesList from './components/games/savedGames/SavedGames'; // Importa el componente SavedGamesList
+import AllAmiibos from './components/amiibos/AllAmiibos';
 import './App.css';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Routes>
             <Route path="/show-games" element={<ShowGames games={games} onClick={() => setPage(page => page + 1)} />} />
             <Route path="/saved-games" element={<SavedGamesList savedGames={savedGames} />} /> {/* Añade la ruta para el componente SavedGamesList */}
+            <Route path="/all-amiibos" element={<AllAmiibos />} />
           </Routes>
         )}
       </div>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import SaveGamesButton from '../buttons/favButton/FavButton';
-import GameModal from '../modal/Modal';
-import { getGames } from '../../utils/fetch';
-import './SavedGames.css'; // Asegúrate de importar el archivo CSS
+import { getGames } from '../../../utils/fetchGames';
+import SaveGamesButton from '../../buttons/favButton/FavButton';
+import GameModal from '../../modal/Modal';
+import './ShowGames.css';  // Importa el archivo CSS
 
-function SavedGamesList() {
-  const [savedGames, setSavedGames] = useState(JSON.parse(localStorage.getItem('savedGames')) || []);
+function ShowGames() {
+  const [games, setGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
+  const [savedGames, setSavedGames] = useState(JSON.parse(localStorage.getItem('savedGames')) || []);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -49,10 +50,10 @@ function SavedGamesList() {
   };
 
   return (
-    <div className="saved-games-container">
-      <h1>Saved Games</h1>
-      <div className="saved-games-grid">
-        {savedGames.map((game) => (
+    <div className="container">
+      <h1 className='.pixel'>Pixel Games</h1>
+      <div className="games-grid">
+        {games.map((game) => (
           <div key={game.id} className="game-card">
             <img className="game-img custom-cursor" src={game.background_image} alt={game.name} onClick={() => handleGameClick(game)} />
             <h2>{game.name}</h2>
@@ -76,4 +77,4 @@ function SavedGamesList() {
   );
 }
 
-export default SavedGamesList;
+export default ShowGames;
