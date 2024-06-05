@@ -1,0 +1,80 @@
+@font-face {
+    font-family: "finalf.ttf";
+    src: url(../../../assets/fonts/finalf.ttf);
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-family: "finalf.ttf";
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffff;
+    text-shadow: 2px 2px #212421, 1px 1px #212021;
+}
+
+.amiibo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.amiibo-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: #eff1ff;
+    text-shadow: 2px 2px #212421, 1px 1px #212021;
+    font-family: "finalf.ttf";
+    font-size: 20px;
+    font-weight: normal;
+    border: solid 1px #424542;
+    box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7, -1px 1px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
+    width: 100%;
+    padding: 5px 10px;
+    background: #04009d;
+    background: -moz-linear-gradient(top, #04009d 0%, #06004d 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #04009d), color-stop(100%, #06004d));
+    background: -webkit-linear-gradient(top, #04009d 0%, #06004d 100%);
+    background: -o-linear-gradient(top, #04009d 0%, #06004d 100%);
+    background: -ms-linear-gradient(top, #04009d 0%, #06004d 100%);
+    background: linear-gradient(to bottom, #04009d 0%, #06004d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04009d', endColorstr='#06004d', GradientType=0);
+    border-radius: 7px;
+    margin: 0 auto;
+}
+
+.amiibo-card:hover {
+    transform: scale(1.05);
+}
+
+.amiibo-card h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.amiibo-card p {
+    margin: 5px 0;
+}
+
+.amiibo-img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.amiibo-img:hover {
+    cursor: url('http://www.rw-designer.com/cursor-view/208219.png'), auto;
+}

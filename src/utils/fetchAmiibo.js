@@ -8,14 +8,10 @@ const fetchData = async (route, method, inputData = null) => {
         }
     };
 
-    if (method.toLowerCase() === 'get') {
-        if (inputData) {
-            Object.keys(inputData).forEach(key => {
-                url.searchParams.append(key, inputData[key]);
-            });
-        }
-    } else if (method.toLowerCase() === 'post') {
-        fetchOptions.body = JSON.stringify(inputData);
+    if (method.toLowerCase() === 'get' && inputData) {
+        Object.keys(inputData).forEach(key => {
+            url.searchParams.append(key, inputData[key]);
+        });
     }
 
     try {
@@ -27,34 +23,30 @@ const fetchData = async (route, method, inputData = null) => {
         return { error: error.message };
     }
 };
-// Función para obtener todas las amiibos
-const getAmiibos = async (character = '', type = '') => {
+
+// Function to get all amiibos
+const getAmiibos = async () => {
     const route = "https://amiiboapi.com/api/amiibo/";
-    const data = await fetchData(route, "get", { character, type });
+    const data = await fetchData(route, "get");
     return data;
 };
 
-// Función para obtener los amiibos de un personaje
-const getCharacterAmiibo = async (name) => {
-    const route = "https://amiiboapi.com/api/amiibo/?name=" + name;
+// Function to get amiibos of a character
+const getCharacterAmiibo = async (character) => {
+    const route = `https://amiiboapi.com/api/amiibo/?character=${character}`;
     const data = await fetchData(route, "get");
     return data;
 }
 
-// Función para obtener un solo amiibo
+// Function to get a single amiibo by name
 const getSingleAmiibo = async (name) => {
-    const route = "https://amiiboapi.com/api/amiibo/?character=value";
+    const route = `https://amiiboapi.com/api/amiibo/?name=${name}`;
     const data = await fetchData(route, "get");
     return data;
 }
-
-
-
-
 
 export {
     getAmiibos,
     getCharacterAmiibo,
     getSingleAmiibo
-    
 };

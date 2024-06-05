@@ -1,7 +1,8 @@
 @font-face {
     font-family: "finalf.ttf";
-    src: url(/src/assets/fonts/finalf.ttf);
+    src: url(../../../assets/fonts/finalf.ttf);
 }
+
 
 .container {
     padding: 20px;
@@ -29,7 +30,7 @@ h1 {
   
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Cuatro columnas de igual tamaño */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     justify-content: center;
 }
@@ -45,7 +46,7 @@ h1 {
     color: #eff1ff;
     text-shadow: 2px 2px #212421,
                  1px 1px #212021;
-    font-family: Verdana, sans-serif;
+    font-family: "finalf.ttf";
     font-size: 20px;
     font-weight: normal;
     border: solid 1px #424542;
