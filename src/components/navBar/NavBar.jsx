@@ -1,14 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './NavBar.css';
 
 function Navbar() {
-  const [menuActive, setMenuActive] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  const [menuActive, setMenuActive] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768 && isHome) {
+        setMenuActive(true);
+      } else {
+        setMenuActive(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isHome]);
+
   const toggleMenu = () => {
     setMenuActive(!menuActive);
+  };
+
+  const handleLinkClick = () => {
+    if (window.innerWidth <= 768) {
+      setMenuActive(false);
+    }
   };
 
   return (
@@ -16,15 +39,16 @@ function Navbar() {
       <div className="navbar-toggle" onClick={toggleMenu}></div>
       <ul className={`navbar-list ${menuActive ? 'active' : ''} ${isHome ? 'navbar-list-home' : ''}`}>
         <li className="navbar-item">
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={handleLinkClick}>Home</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/show-games">Games</Link>
+          <Link to="/show-games" onClick={handleLinkClick}>Games</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/saved-games">Favorites</Link></li>
+          <Link to="/saved-games" onClick={handleLinkClick}>Favorites</Link>
+        </li>
         <li className="navbar-item">
-          <Link to="/all-amiibos">Amiibos</Link>
+          <Link to="/all-amiibos" onClick={handleLinkClick}>Amiibos</Link>
         </li>
         <li className="navbar-item">
           {localStorage.getItem('token') ? (
@@ -37,7 +61,7 @@ function Navbar() {
               Logout
             </button>
           ) : (
-            <Link to="/login">Login</Link>
+            <Link to="/login" onClick={handleLinkClick}>Login</Link>
           )}
         </li>
       </ul>

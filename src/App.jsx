@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navBar/NavBar';
 import ShowGames from './components/games/allGames/ShowGames';
-import SavedGamesList from './components/games/savedGames/SavedGames';
+import SavedGamesList from './components/savedItems/SavedItems';
 import AllAmiibos from './components/amiibos/AllAmiibos';
 import Home from './components/Home/Home';
 import './App.css';

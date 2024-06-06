@@ -1,13 +1,14 @@
+// ShowGames.js
 import React, { useState, useEffect } from 'react';
 import { getGames } from '../../../utils/fetchGames';
-import SaveGamesButton from '../../buttons/favButton/FavButton';
-import GameModal from '../../modal/Modal';
-import './ShowGames.css';  // Importa el archivo CSS
+import SaveButton from '../../buttons/favButton/FavButton';
+import GenericModal from '../../modal/Modal';
+import './ShowGames.css'; 
 
 function ShowGames() {
   const [games, setGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
-  const [savedGames, setSavedGames] = useState(JSON.parse(localStorage.getItem('savedGames')) || []);
+  const [savedItems, setSavedItems] = useState(JSON.parse(localStorage.getItem('savedItems')) || []);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -28,20 +29,20 @@ function ShowGames() {
     setIsModalOpen(true);
   };
 
-  const handleSaveGame = (game) => {
-    const isSaved = savedGames.some(savedGame => savedGame.id === game.id);
-    let updatedGames;
+  const handleSaveItem = (game) => {
+    const isSaved = savedItems.some(savedItem => savedItem.id === game.id);
+    let updatedItems;
     if (isSaved) {
-      updatedGames = savedGames.filter(savedGame => savedGame.id !== game.id);
+      updatedItems = savedItems.filter(savedItem => savedItem.id !== game.id);
     } else {
-      updatedGames = [...savedGames, game];
+      updatedItems = [...savedItems, game];
     }
-    setSavedGames(updatedGames);
-    localStorage.setItem('savedGames', JSON.stringify(updatedGames));
+    setSavedItems(updatedItems);
+    localStorage.setItem('savedItems', JSON.stringify(updatedItems));
   };
 
-  const isGameSaved = (game) => {
-    return savedGames.some(savedGame => savedGame.id === game.id);
+  const isItemSaved = (game) => {
+    return savedItems.some(savedItem => savedItem.id === game.id);
   };
 
   const handleCloseModal = () => {
@@ -59,17 +60,18 @@ function ShowGames() {
             <h2>{game.name}</h2>
             <p>Released: {game.released}</p>
             <p>Rating: {game.rating}</p>
-            <SaveGamesButton 
-              selectedGame={game} 
-              isSaved={isGameSaved(game)} 
-              handleSaveGame={handleSaveGame} 
+            <SaveButton 
+              item={game} 
+              isSaved={isItemSaved(game)} 
+              handleSaveItem={handleSaveItem} 
             />
           </div>
         ))}
       </div>
       {isModalOpen && (
-        <GameModal 
-          game={selectedGame} 
+        <GenericModal 
+          item={selectedGame} 
+          type="game" 
           onClose={handleCloseModal} 
         />
       )}

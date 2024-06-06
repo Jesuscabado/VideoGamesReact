@@ -1,7 +1,7 @@
 /* importar fuente */
 @font-face {
   font-family: "finalf.ttf";
-  src: url(../src/assets/fonts/SuperNintendo.ttf);
+  src: url(/fonts/SuperNintendo.ttf);
 }
 #root {
   max-width: 1280px;
@@ -44,7 +44,7 @@
 
 /* src/App.css */
 .custom-cursor {
-  cursor: url('./icons/FinalCursor.png'), auto;
+  cursor: url('/icons/FinalCursor.png'), auto;
 }
 
 body {

@@ -1,7 +1,7 @@
 /* importar fuente */
 @font-face {
   font-family: "finalf.ttf";
-  src: url(../../assets/fonts/SuperNintendo.ttf);
+  src: url(/fonts/SuperNintendo.ttf);
 }
 
 .modal-overlay {

@@ -34,7 +34,7 @@
         position: relative;
         width: 100%;
         height: 100vh;
-        background: url('/img/NewHomeImage.png') no-repeat center center;
+        background-image:none;
         background-size: cover;
         display: flex;
         justify-content: center;
