@@ -66,10 +66,10 @@ function AllAmiibos() {
       <h1>Amiibos</h1>
       <div className="amiibo-grid">
         {amiibos.map((amiibo) => (
-          <div key={amiibo.tail} className="amiibo-card" onClick={() => handleAmiiboClick(amiibo)}>
+          <div key={amiibo.tail} className="amiibo-card" >
             <h1>Saga: {amiibo.gameSeries}</h1>
             <h2>{amiibo.character}</h2>
-            <img className="amiibo-img" src={amiibo.image} alt={amiibo.name} />
+            <img className="amiibo-img" onClick={() => handleAmiiboClick(amiibo)} src={amiibo.image} alt={amiibo.name} />
             <p>Tipo de Amiibo: {amiibo.type}</p>
             <p>Fecha de Lanzamiento en Europa: {amiibo.release.eu}</p>
             <SaveButton 
